@@ -3,14 +3,15 @@ import 'font-awesome/css/font-awesome.min.css';
 
 export default class TodoItem extends Component {
   render() {
+    const { title, handleDelete, handleEdit } = this.props;
     return (
       <li className='list-group-item text-capitalize d-flex justify-content-between my-2'>
-        <h6>Title</h6>
+        <h6>{title}</h6>
         <div className='todo-icon'>
-          <span className='mx-2 text-success'>
+          <span className='mx-2 text-success' onClick={handleEdit}>
             <i className='fa fa-pencil' />
           </span>
-          <span className='mx-2 text-danger'>
+          <span className='mx-2 text-danger' onClick={handleDelete}>
             <i className='fa fa-trash' />
           </span>
         </div>
