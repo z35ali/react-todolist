@@ -24,7 +24,6 @@ export default class App extends Component {
       id: this.state.id,
       title: this.state.item
     };
-    //console.log(newItem);
 
     const updateItems = [...this.state.items, newItem]; // spread operator split up array into items and put in
 
@@ -33,6 +32,12 @@ export default class App extends Component {
       item: '',
       id: uuid(),
       editedItem: false
+    });
+  };
+
+  clearList = () => {
+    this.setState({
+      items: []
     });
   };
   render() {
@@ -46,7 +51,7 @@ export default class App extends Component {
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
             />
-            <TodoList items={this.state.items} />
+            <TodoList items={this.state.items} clearList={this.clearList} />
           </div>
         </div>
       </div>
