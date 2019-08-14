@@ -8,7 +8,7 @@ export default class App extends Component {
     items: [],
     id: uuid(),
     item: '',
-    editedItem: false
+    editItem: false
   };
 
   handleChange = event => {
@@ -31,7 +31,7 @@ export default class App extends Component {
       items: updateItems,
       item: '',
       id: uuid(),
-      editedItem: false
+      editItem: false
     });
   };
 
@@ -48,21 +48,35 @@ export default class App extends Component {
     });
   };
 
+  handleEdit = id => {
+    const sortedItems = this.state.items.filter(item => item.id !== id);
+
+    const selectedItem = this.state.items.find(item => item.id === id);
+    console.log(selectedItem);
+    this.setState({
+      items: sortedItems,
+      item: selectedItem.title,
+      editItem: true
+    });
+  };
+
   render() {
     return (
       <div className='container'>
         <div className='row'>
           <div className='col-10 mx-auto col-md-8 mt-4'>
-            <h3 className='text-capitalize text-center'>React Todo List</h3>
+            <h3 className='text-capitalize text-center'>Todo Input</h3>
             <TodoInput
               item={this.state.item}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
+              editItem={this.state.editItem}
             />
             <TodoList
               items={this.state.items}
               clearList={this.clearList}
               handleDelete={this.handleDelete}
+              handleEdit={this.handleEdit}
             />
           </div>
         </div>
